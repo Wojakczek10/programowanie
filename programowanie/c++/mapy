@@ -1,0 +1,177 @@
+// Zadanie 1. Zliczanie wystąpień liczb
+// Typ mapy: map<int, int>
+// Wylosuj 30 liczb całkowitych z zakresu od 1 do 10. Za pomocą mapy zlicz, ile razy wystąpiła każda z wylosowanych liczb. Wyświetl wszystkie liczby wraz z liczbą ich wystąpień.
+
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <map>
+
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    map<int, int> licznik;
+
+    cout << "Wylosowane liczby: ";
+    for (int i = 0; i < 30; ++i) {
+        int number = rand() % 10 + 1;
+        cout << number << " ";
+        licznik[number]++;
+    }
+
+    cout << "\n\nLiczba wystapien:\n";
+    for (const auto& it : licznik) {
+        cout << "Liczba " << it.first << ": " << it.second << " razy" << endl;
+    }
+
+    return 0;
+}
+
+
+// Zadanie 2. Losowanie punktów
+// Typ mapy: map<int, int>
+// Dla 15 uczniów o numerach od 1 do 15 wylosuj liczbę punktów z zakresu od 0 do 100. Kluczem mapy powinien być numer ucznia, a wartością liczba zdobytych punktów. Wyświetl zawartość mapy oraz numery uczniów, którzy zdobyli co najmniej 50 punktów.
+
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <map>
+
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    map<int, int> students;
+
+    for (int i = 1; i <= 15; ++i) {
+        students[i] = rand() % 101;
+    }
+
+    cout << "Wszyscy uczniowie:" << endl;
+    for (const auto& it : students) {
+        cout << "Uczen nr " << it.first << ": " << it.second << " pkt" << endl;
+    }
+
+    cout << "\nUczniowie z co najmniej 50 punktami:" << endl;
+    for (const auto& it : students) {
+        if (it.second >= 50) {
+            cout << it.first << " ";
+        }
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
+// Zadanie 3. Losowanie owoców
+// Typ mapy: map<string, int>
+// Przygotuj tablicę zawierającą nazwy pięciu owoców: jabłko, gruszka, banan, kiwi, śliwka. Wylosuj 40 razy jeden z tych owoców. Za pomocą mapy zlicz, ile razy wylosowano każdy owoc. Wyświetl zawartość mapy.
+
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    string owoce[5] = {"jabłko", "gruszka", "banan", "kiwi", "śliwka"};
+    map<string, int> licznik;
+
+    for (int i = 0; i < 40; i++) {
+        int los = rand() % 5;
+        licznik[owoce[los]]++;
+    }
+
+    for (const auto& para : licznik) {
+        cout << para.first << ": " << para.second << endl;
+    }
+
+    return 0;
+}
+
+
+// Zadanie 4. Najczęściej występująca liczba
+// Typ mapy: map<int, int>
+// Wylosuj 50 liczb całkowitych z zakresu od 1 do 15. Zapisz w mapie liczbę wystąpień każdej liczby. Następnie znajdź i wyświetl liczbę, która wystąpiła najczęściej, oraz liczbę jej wystąpień. W przypadku remisu wyświetl wszystkie takie liczby.
+
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <map>
+
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    map<int, int> licznik;
+
+    for (int i = 0; i < 50; i++) {
+        int liczba = rand() % 15 + 1;
+        licznik[liczba]++;
+    }
+
+    cout << "Wszystkie wystapienia:" << endl;
+    for (const auto& para : licznik) {
+        cout << "Liczba " << para.first << ": " << para.second << " razy" << endl;
+    }
+
+    int maxWystapien = 0;
+    for (const auto& para : licznik) {
+        if (para.second > maxWystapien) {
+            maxWystapien = para.second;
+        }
+    }
+
+    cout << "\nNajczesciej wystepujace liczby (" << maxWystapien << " razy): ";
+    for (const auto& para : licznik) {
+        if (para.second == maxWystapien) {
+            cout << para.first << " ";
+        }
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
+// Zadanie 5. Ceny produktów
+// Typ mapy: map<string, int>
+// Przygotuj tablicę zawierającą nazwy sześciu produktów: chleb, mleko, masło, ser, sok, makaron. Dla każdego produktu wylosuj cenę w pełnych złotych z zakresu od 2 do 25. Zapisz nazwy produktów i ich ceny w mapie. Wyświetl zawartość mapy oraz oblicz łączną cenę wszystkich produktów.
+
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <map>
+#include <string>
+
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    string produkty[6] = {"chleb", "mleko", "masło", "ser", "sok", "makaron"};
+    map<string, int> ceny;
+
+    for (int i = 0; i < 6; i++) {
+        ceny[produkty[i]] = rand() % 24 + 2;
+    }
+
+    int suma = 0;
+    for (const auto& para : ceny) {
+        cout << para.first << ": " << para.second << " zl" << endl;
+        suma += para.second;
+    }
+
+    cout << "Laczna cena wszystkich produktow: " << suma << " zl" << endl;
+
+    return 0;
+}
